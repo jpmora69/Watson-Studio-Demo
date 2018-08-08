@@ -1,0 +1,125 @@
+[
+    {
+        "id": "82406bea.02f7f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c039d087.3c18",
+        "type": "inject",
+        "z": "82406bea.02f7f8",
+        "name": "",
+        "topic": "",
+        "payload": "{\"fields\":[\"CreditScore\",\"Geography\",\"Gender\",\"Age\",\"Tenure\",\"Balance\",\"NumOfProducts\",\"HasCrCard\",\"IsActiveMember\",\"EstimatedSalary\",\"Exited\"],\"values\":[[500,\"Spain\",\"Male\",50,2,10000,2,1,0,40000,-1]]}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "c5e7faa1.d5d5d8"
+            ]
+        ]
+    },
+    {
+        "id": "c5e7faa1.d5d5d8",
+        "type": "function",
+        "z": "82406bea.02f7f8",
+        "name": "Token header",
+        "func": "msg.fields=msg.payload;\nmsg.headers={\"Content-type\":\"application/json\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "561b2a5e.6147a4"
+            ]
+        ]
+    },
+    {
+        "id": "561b2a5e.6147a4",
+        "type": "http request",
+        "z": "82406bea.02f7f8",
+        "name": "Token request",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://ibm-watson-ml.mybluemix.net/v3/identity/token",
+        "tls": "",
+        "x": 480,
+        "y": 100,
+        "wires": [
+            [
+                "748e0136.7db3a"
+            ]
+        ]
+    },
+    {
+        "id": "748e0136.7db3a",
+        "type": "function",
+        "z": "82406bea.02f7f8",
+        "name": "Grab token",
+        "func": "msg.token = JSON.parse(msg.payload).token;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "ad493f30.9a8f2"
+            ]
+        ]
+    },
+    {
+        "id": "ad493f30.9a8f2",
+        "type": "function",
+        "z": "82406bea.02f7f8",
+        "name": "Scoring header",
+        "func": "msg.headers={\"Content-type\": \"application/json\",\"Authorization\":\"Bearer \" + msg.token}\nmsg.payload=msg.fields;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "3b8ca80b.c06aa8"
+            ]
+        ]
+    },
+    {
+        "id": "3b8ca80b.c06aa8",
+        "type": "http request",
+        "z": "82406bea.02f7f8",
+        "name": "Scoring request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "poner aquí scoring end point",
+        "tls": "",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "85b425f3.34a078"
+            ]
+        ]
+    },
+    {
+        "id": "85b425f3.34a078",
+        "type": "debug",
+        "z": "82406bea.02f7f8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 550,
+        "y": 300,
+        "wires": []
+    }
+]

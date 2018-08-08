@@ -1,0 +1,28 @@
+﻿Un banco ha estado teniendo una tasa de abandono muy alta. Para entender el problema decidieron realizar un experimento en donde seleccionaron 10.000 clientes de manera aleatoria y registraron algunos de sus datos más importantes. La información recolectada por cliente es:
+
+CutsomerId: El código que identifica al cliente
+
+Surname: Apellido del cliente
+
+CreditScore: Puntaje bancario que indica qué tan bueno es el cliente para pagar créditos o préstamos.
+
+Geography: País donde se encuentra la cuenta del cliente
+
+Gender: Género del cliente
+
+Age: Edad del cliente
+
+Tenure: Cuánto tiempo llevan en el banco
+
+Balance: Balance de la cuenta del cliente
+
+NumOfProduct: Número de productos que el cliente tiene con el banco(tarjeta débito, préstamo etc...)
+
+HasCrCard: Si tiene o no tarjeta crédito
+
+IsActiveMember: Si el cliente es o no miembro activo. Existen diferentes formas de medir esto como por ejemplo, si el cliente 		   		   hizo logging o realizó una transacción en el último mes
+
+EstimatedSalary:Estimación del banco del salario del cliente
+
+Al cabo de 6 meses miraron de estos clientes quiénes abandonaron el banco. Esto se registró en una nueva variabe binaria llamada "Exited" que indica si el cliente abandonó o no el banco. El banco ahora requiere a un data scientist para encontrar insights sobre qué genera el abandono en clientes y para crear un modelo que prediga si un cliente abandonará el banco.
+
